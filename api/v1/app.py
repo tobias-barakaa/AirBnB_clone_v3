@@ -1,8 +1,7 @@
 #!/usr/bin/python3
-""" Import a blueprint and runs Flask """
+""" Import a blueprint """
 
 from os import getenv
-
 from flasgger import Swagger
 from flask import Flask, jsonify, make_response
 from flask_cors import CORS
