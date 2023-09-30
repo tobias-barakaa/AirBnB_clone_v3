@@ -39,3 +39,17 @@ class TestConsoleDocs(unittest.TestCase):
                          "HBNBCommand class needs a docstring")
         self.assertTrue(len(HBNBCommand.__doc__) >= 1,
                         "HBNBCommand class needs a docstring")
+
+    def test_successful_update(self):
+        # Test a successful update operation
+        args = 'Place 1 name "New Name"'
+        with patch('models.storage.all', return_value={'Place.1': MagicMock()}):
+            with patch('builtins.print') as mock_print:
+                self.instance.do_update(args)
+                mock_print.assert_not_called()
+
+    def test_class_name_missing(self):
+        # Test when class name is missing
+        with patch('builtins.print') as mock_print:
+            self.instance.do_update('')
+            mock_print.assert_called_with('** class name missing **')
