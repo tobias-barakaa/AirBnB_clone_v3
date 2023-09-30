@@ -3,7 +3,7 @@
 Contains the class TestConsoleDocs
 """
 
-from .. import console
+import console
 import inspect
 import pep8
 import unittest
