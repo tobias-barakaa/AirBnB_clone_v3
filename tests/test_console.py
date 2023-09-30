@@ -39,15 +39,3 @@ class TestConsoleDocs(unittest.TestCase):
                          "HBNBCommand class needs a docstring")
         self.assertTrue(len(HBNBCommand.__doc__) >= 1,
                         "HBNBCommand class needs a docstring")
-
-    def test_console_module_functions_exist(self):
-        """Test that required functions exist in the console module"""
-        functions_to_check = ['function1', 'function2', 'function3']  # Replace with actual function names
-        for func_name in functions_to_check:
-            self.assertTrue(hasattr(console, func_name), f"{func_name} is missing in the console module")
-
-    def test_HBNBCommand_methods_exist(self):
-        """Test that required methods exist in the HBNBCommand class"""
-        methods_to_check = ['method1', 'method2', 'method3']  # Replace with actual method names
-        for method_name in methods_to_check:
-            self.assertTrue(hasattr(HBNBCommand, method_name), f"{method_name} is missing in the HBNBCommand class")
