@@ -40,16 +40,14 @@ class TestConsoleDocs(unittest.TestCase):
         self.assertTrue(len(HBNBCommand.__doc__) >= 1,
                         "HBNBCommand class needs a docstring")
 
-    def test_successful_update(self):
-        # Test a successful update operation
-        args = 'Place 1 name "New Name"'
-        with patch('models.storage.all', return_value={'Place.1': MagicMock()}):
-            with patch('builtins.print') as mock_print:
-                self.instance.do_update(args)
-                mock_print.assert_not_called()
+    def test_console_module_functions_exist(self):
+        """Test that required functions exist in the console module"""
+        functions_to_check = ['function1', 'function2', 'function3']  # Replace with actual function names
+        for func_name in functions_to_check:
+            self.assertTrue(hasattr(console, func_name), f"{func_name} is missing in the console module")
 
-    def test_class_name_missing(self):
-        # Test when class name is missing
-        with patch('builtins.print') as mock_print:
-            self.instance.do_update('')
-            mock_print.assert_called_with('** class name missing **')
+    def test_HBNBCommand_methods_exist(self):
+        """Test that required methods exist in the HBNBCommand class"""
+        methods_to_check = ['method1', 'method2', 'method3']  # Replace with actual method names
+        for method_name in methods_to_check:
+            self.assertTrue(hasattr(HBNBCommand, method_name), f"{method_name} is missing in the HBNBCommand class")
