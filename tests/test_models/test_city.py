@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """
-Contains the TestCityDocs classes
+Contains the TestCityDocs and TestCityMethods classes
 """
 
 from datetime import datetime
@@ -57,7 +57,8 @@ class TestCityDocs(unittest.TestCase):
                             "{:s} method needs a docstring".format(func[0]))
 
 
-class TestCity(unittest.TestCase):
+# Renamed this class to TestCityMethods
+class TestCityMethods(unittest.TestCase):
     """Test the City class"""
     def test_is_subclass(self):
         """Test that City is a subclass of BaseModel"""
@@ -112,3 +113,7 @@ class TestCity(unittest.TestCase):
         city = City()
         string = "[City] ({}) {}".format(city.id, city.__dict__)
         self.assertEqual(string, str(city))
+
+
+if __name__ == '__main__':
+    unittest.main()
