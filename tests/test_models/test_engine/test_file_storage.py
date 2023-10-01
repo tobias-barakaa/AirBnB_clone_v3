@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """
-Contains the TestFileStorageDocs classe
+Contains the TestFileStorageDocs classes
 """
 
 from datetime import datetime
