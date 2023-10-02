@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """
-running first app
+running first ap
 """
 from flask import Flask
 from models import storage
