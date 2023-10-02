@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """
-running first ap
+script to running the first app
 """
 from flask import Flask
 from models import storage
@@ -26,8 +26,9 @@ def close_storage(exception):
 
 if __name__ == "__main__":
     # Get the host and port values from environment variables or use defaults
-    host = os.environ.get("HBNB_API_HOST", "0.0.0.0")
-    port = int(os.environ.get("HBNB_API_PORT", 5000))
+    HBNB_API_HOST = getenv('HBNB_API_HOST')
+    HBNB_API_PORT = getenv('HBNB_API_PORT')
 
-    # Run the Flask application with the specified host and port
-    app.run(host=host, port=port)
+    host = '0.0.0.0' if not HBNB_API_HOST else HBNB_API_HOST
+    port = 5000 if not HBNB_API_PORT else HBNB_API_PORT
+    app.run(host=host, port=port, threaded=True)
