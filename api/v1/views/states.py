@@ -13,12 +13,14 @@ def get_states():
     states = [state.to_dict() for state in storage.all(State).values()]
     return jsonify(states)
 
+
 @states_bp.route('/<string:state_id>', methods=['GET'], strict_slashes=False)
 def get_state(state_id):
     state = storage.get(State, state_id)
     if state is None:
         abort(404)
     return jsonify(state.to_dict())
+
 
 @states_bp.route('/', methods=['POST'], strict_slashes=False)
 def create_state():
@@ -30,6 +32,7 @@ def create_state():
     state = State(**data)
     state.save()
     return jsonify(state.to_dict()), 201
+
 
 @states_bp.route('/<string:state_id>', methods=['PUT'], strict_slashes=False)
 def update_state(state_id):
@@ -45,7 +48,9 @@ def update_state(state_id):
     state.save()
     return jsonify(state.to_dict())
 
-@states_bp.route('/<string:state_id>', methods=['DELETE'], strict_slashes=False)
+
+@states_bp.route('/<string:state_id>',
+                 methods=['DELETE'], strict_slashes=False)
 def delete_state(state_id):
     state = storage.get(State, state_id)
     if state is None:
