@@ -1,4 +1,10 @@
-from . import app_views  # Import the app_views Blueprint
+#!/usr/bin/python3
+"""
+running first app
+"""
+from flask import Flask, jsonify
+from api.v1.views import app_views
+from models import storage
 
 @app_views.route('/status', methods=['GET'])
 def get_status():
