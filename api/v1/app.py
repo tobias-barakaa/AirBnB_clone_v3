@@ -28,6 +28,14 @@ def close_storage(exception):
     storage.close()
 
 
+# Define a handler for 404 errors
+@app.errorhandler(404)
+def not_found(error):
+    response = jsonify({"error": "Not found"})
+    response.status_code = 404
+    return response
+
+
 if __name__ == "__main__":
     # Get the host and port values from environment variables or use defaults
     HBNB_API_HOST = getenv('HBNB_API_HOST')
