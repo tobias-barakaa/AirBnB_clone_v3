@@ -14,4 +14,4 @@ def get_status():
     Returns:
         JSON response with the status "OK"
     """
-    return {"status": "OK"}, 200
+   return jsonify({'status': 'OK'})
