@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """
-running first app
+running first ap
 """
 from flask import Flask, jsonify
 from api.v1.views import app_views
