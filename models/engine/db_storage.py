@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """
-Contains the class DBStorage
+Contains the class DBStorag
 """
 
 import models
@@ -74,3 +74,18 @@ class DBStorage:
     def close(self):
         """call remove() method on the private session attribute"""
         self.__session.remove()
+
+    def get(self, cls, id):
+        """Retrieve an object based on class and ID."""
+        return self.__session.query(cls).filter(cls.id == id).first()
+
+    def count(self, cls=None):
+        """Count objects in storage matching the given class."""
+        if cls:
+            return self.__session.query(cls).count()
+        else:
+            # If no class is passed, count all objects
+            count = 0
+            for model_class in self.all_classes():
+                count += self.__session.query(model_class).count()
+            return count

@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """
-Contains the TestDBStorageDocs and TestDBStorage classes
+Contains the TestDBStorageDocs and TestDBStorage classe
 """
 
 from datetime import datetime
@@ -87,3 +87,35 @@ class TestFileStorage(unittest.TestCase):
     @unittest.skipIf(models.storage_t != 'db', "not testing db storage")
     def test_save(self):
         """Test that save properly saves objects to file.json"""
+
+    def test_get(self):
+        # Create a test State object and add it to the database
+        test_state = State(name="TestState")
+        test_state.save()
+
+        # Use get method to retrieve the test State object by ID
+        retrieved_state = self.storage.get(State, test_state.id)
+
+        # Check if the retrieved object is an instance of State
+        self.assertIsInstance(retrieved_state, State)
+
+        # Check if the retrieved object's ID matches the test object's ID
+        self.assertEqual(retrieved_state.id, test_state.id)
+
+        # Try to retrieve a non-existent object (should return None)
+        non_existent_state = self.storage.get(State, "non_existent_id")
+        self.assertIsNone(non_existent_state)
+
+    def test_count(self):
+        # Count all State objects in the database
+        state_count = self.storage.count(State)
+
+        # Create additional test State objects and add them to the database
+        for i in range(5):
+            State(name=f"TestState_{i}").save()
+
+        # Count all State objects again after adding more
+        updated_state_count = self.storage.count(State)
+
+        # Check if the count increased by 5
+        self.assertEqual(updated_state_count, state_count + 5)
