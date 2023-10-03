@@ -10,7 +10,6 @@ from api.v1.views import app_views
 from api.v1.views.states import get_state
 
 
-@app_views.route('/states/<state_id>/cities', methods=['GET'])
 @app_views.route('/states/<state_id>/cities/', methods=['GET'])
 def list_cities_of_state(state_id):
     '''Retrieves a list of all City objects'''
