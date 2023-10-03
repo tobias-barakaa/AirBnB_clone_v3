@@ -75,7 +75,7 @@ def search_place():
         for p in all_places.values():
             if (p.city_id in dic["cities"] or p.city_id in list_city_id):
                 all_objs.append(p)
-                
+
     if all_objs == []:
         """if states and cities are empty, retrieve all places
         """
