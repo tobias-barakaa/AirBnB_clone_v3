@@ -50,7 +50,7 @@ def manufacture_user():
         abort(400, 'Missing name')
     users = []
     new = User(email=request.json['email'],
-                    password=request.json['password'])
+               password=request.json['password'])
     storage.new(new)
     storage.save()
     users.append(new.to_dict())
@@ -68,23 +68,23 @@ def updates(user_id):
         abort(400, 'Not a JSON')
     try:
         user_data[0]['first_name'] = request.json['first_name']
-    except:
+    except ValueError:
         pass
     try:
         user_data[0]['last_name'] = request.json['last_name']
-    except:
+    except ValueError:
         pass
     for obj in users:
         if obj.id == user_id:
             try:
                 if request.json['first_name'] is not None:
                     obj.first_name = request.json['first_name']
-            except:
+            except ValueError:
                 pass
             try:
                 if request.json['last_name'] is not None:
                     obj.last_name = request.json['last_name']
-            except:
+            except ValueError:
                 pass
     storage.save()
     return jsonify(user_data[0]), 200
