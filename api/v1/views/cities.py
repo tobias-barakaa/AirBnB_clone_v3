@@ -7,29 +7,28 @@ from models.state import State
 from models.city import City
 
 
-@app_views.route('/states/<state_id>/cities', methods=['GET'],
+@app_views.route("/states/<state_id>/cities", methods=["GET"],
                  strict_slashes=False)
 def cities(state_id):
-    """ Retrieves the list of all City objects """
+    """Retrieves the list of all City objects"""
     state = storage.get("State", state_id)
     if not state:
         abort(404)
     return jsonify([city.to_dict() for city in state.cities])
 
 
-@app_views.route('/cities/<city_id>', methods=['GET'], strict_slashes=False)
+@app_views.route("/cities/<city_id>", methods=["GET"], strict_slashes=False)
 def r_city_id(city_id):
-    """ Retrieves a City object """
+    """Retrieves a City object"""
     city = storage.get("City", city_id)
     if not city:
         abort(404)
     return jsonify(city.to_dict())
 
 
-@app_views.route('/cities/<city_id>', methods=['DELETE'],
-                 strict_slashes=False)
+@app_views.route("/cities/<city_id>", methods=["DELETE"], strict_slashes=False)
 def del_city(city_id):
-    """ Deletes a City object """
+    """Deletes a City object"""
     city = storage.get("City", city_id)
     if not city:
         abort(404)
@@ -38,10 +37,10 @@ def del_city(city_id):
     return make_response(jsonify({}), 200)
 
 
-@app_views.route('/states/<state_id>/cities', methods=['POST'],
+@app_views.route("/states/<state_id>/cities", methods=["POST"],
                  strict_slashes=False)
 def post_city(state_id):
-    """ Creates a City object """
+    """Creates a City object"""
     state = storage.get("State", state_id)
     if not state:
         abort(404)
@@ -51,16 +50,15 @@ def post_city(state_id):
     if "name" not in new_city:
         abort(400, "Missing name")
     city = City(**new_city)
-    setattr(city, 'state_id', state_id)
+    setattr(city, "state_id", state_id)
     storage.new(city)
     storage.save()
     return make_response(jsonify(city.to_dict()), 201)
 
 
-@app_views.route('/cities/<city_id>', methods=['PUT'],
-                 strict_slashes=False)
+@app_views.route("/cities/<city_id>", methods=["PUT"], strict_slashes=False)
 def put_city(city_id):
-    """ Updates a City object """
+    """Updates a City object"""
     city = storage.get("City", city_id)
     if not city:
         abort(404)
@@ -70,7 +68,7 @@ def put_city(city_id):
         abort(400, "Not a JSON")
 
     for k, v in body_request.items():
-        if k not in ['id', 'state_id', 'created_at', 'updated_at']:
+        if k not in ["id", "state_id", "created_at", "updated_at"]:
             setattr(city, k, v)
 
     storage.save()
