@@ -9,6 +9,7 @@ from flask import jsonify, abort, make_response, request
 from models import storage
 from models.state import State
 
+
 # Define a route to retrieve a list of all State objects
 @app_views.route('/states', methods=['GET'], strict_slashes=False)
 def states():
